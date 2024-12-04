@@ -1,0 +1,80 @@
+package org.example;
+class Node {
+    int data;
+    Node left, right;
+    public Node(int data) {
+        this.data = data;
+        left = right = null;
+    }
+}
+class BinaryTree {
+    Node root;
+    public BinaryTree() {
+        root = null;
+    }
+    public Node insert(Node node, int data) {
+        if (node == null) {
+            return new Node(data);
+        }
+        if (data < node.data) {
+            node.left = insert(node.left, data);
+        } else if (data > node.data) {
+            node.right = insert(node.right, data);
+        }
+        return node;
+    }
+    public void insert(int data) {
+        root = insert(root, data);
+    }
+    public void preOrder(Node node) {
+        if (node != null) {
+            System.out.print(node.data + " ");
+            preOrder(node.left);
+            preOrder(node.right);
+        }
+    }
+    public void inOrder(Node node) {
+        if (node != null) {
+            inOrder(node.left);
+            System.out.print(node.data + " ");
+            inOrder(node.right);
+        }
+    }
+    public void postOrder(Node node) {
+        if (node != null) {
+            postOrder(node.left);
+            postOrder(node.right);
+            System.out.print(node.data + " ");
+        }
+    }
+    public void printPreOrder() {
+        preOrder(root);
+        System.out.println();
+    }
+    public void printInOrder() {
+        inOrder(root);
+        System.out.println();
+    }
+    public void printPostOrder() {
+        postOrder(root);
+        System.out.println();
+    }
+}
+public class BinaryTreeDemo {
+    public static void main(String[] args) {
+        BinaryTree tree = new BinaryTree();
+        tree.insert(50);
+        tree.insert(30);
+        tree.insert(20);
+        tree.insert(40);
+        tree.insert(70);
+        tree.insert(60);
+        tree.insert(80);
+        System.out.print("Pre-order traversal: ");
+        tree.printPreOrder();
+        System.out.print("In-order traversal: ");
+        tree.printInOrder();
+        System.out.print("Post-order traversal: ");
+        tree.printPostOrder();
+    }
+}
